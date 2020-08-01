@@ -1,0 +1,30 @@
+<button class="btn btn-danger" type="button" onclick="doSubscribe()">Subscribe</button>
+<strong id="total-subscribers"><%= video.user.subscribers %></strong>
+</button>
+
+<script>
+    function doSubscribe(){
+        var ajax=new XMLHttpRequest();
+        ajax.open("POST","/do-subscribe",true);
+        // ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.onreadystatechange=function(){
+            if(this.readyState==4 && this.status)
+                {
+                    var response=JSON.parse(this.responseText);
+                    if(response.status=="success"){
+                        var totalSubscribers=document.getElementById("total-subscribers").innerHTML;
+                        totalSubscribers++;
+                        document.getElementById("total").innerHTML=totalSubscribers;
+                    }
+                    else{
+                    alert(response.message);
+                }
+                }
+               
+        }
+    
+    var videoId=document.getElementById("videoId").value;
+    // console.log(videoId)
+      ajax.send("videoId="+videoId);
+    };
+</script>

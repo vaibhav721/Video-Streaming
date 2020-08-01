@@ -1,0 +1,96 @@
+<%- include("layouts/header") %>
+
+<html>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link href="css/glider.min.css" rel="stylesheet" type="text/css">
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+        <link rel="stylesheet" type="text/css" href="/public/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <title>Glide</title>
+    </head>
+    <body>
+      <% var Path=new Array(2) %>
+      <% var thumb=new Array(2) %>
+      <% var title=new Array(2) %>
+      <% var i=0,j=0,k=0 %>
+      <% for (var{ user:{_id:id1},filePath:x,thumbnail:y,title:z} of videos){ %>
+        <% if(id1==id){ %>
+        <%  Path[i++]=x %>
+            <% thumb[j++]=y %>
+            <% title[k++]=z %>
+            <% }%>          
+            <% } %>   
+        <div class="glider-contain multiple">
+            <h1>Videos</h1>
+            <button class="glider-prev">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <div class="glider">
+                <figure>
+                    <video id="videoPlayer" controls style="width:100%;" poster="<%= baseUrl + thumb[0]%>"
+                        src="<%= baseUrl + Path[0]%>" autoplay >
+                      </video>
+                    <p>
+                        <h3><%= title[0] %></h3>
+                       
+                    </p>
+                </figure>
+              
+                 <figure>
+                    <video id="videoPlayer" controls style="width:100%;" poster="<%= baseUrl + thumb[1]%>"
+                        src="<%= baseUrl + Path[1]%>" autoplay >
+                      </video>
+                      <p>
+                          <h3><%= title[1] %></h3>
+                        
+                      </p>
+                </figure>
+               <!-- <figure>
+                    <blockqoute>"This is my awesome little testimonial</blockqoute>
+                    <figcaption>John Doe</figcaption>
+                </figure>
+                <figure>
+                    <blockqoute>"This is my awesome little testimonial</blockqoute>
+                    <figcaption>John Doe</figcaption>
+                </figure>
+                <figure>
+                    <blockqoute>"This is my awesome little testimonial</blockqoute>
+                    <figcaption>John Doe</figcaption>
+                </figure>
+                <figure>
+                    <blockqoute>"This is my awesome little testimonial</blockqoute>
+                    <figcaption>John Doe</figcaption>
+                </figure>
+                <figure>
+                    <blockqoute>"This is my awesome little testimonial</blockqoute>
+                    <figcaption>John Doe</figcaption>
+                </figure> -->
+             </div>
+            
+            
+            <button class="glider-next">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+            <div id="dots" class="glider-dots"></div>
+        </div>
+   
+        <script src="glider.min.js"></script>
+        <script>
+            new Glider(document.querySelector('.glider'),{
+                slidesToShow:1,
+                draggable:true,
+                dots:'#dots',
+                arrows:{
+                    prev:'.glider-prev',
+                    next:'.glider-next'
+                }
+            })
+        </script>
+    </body>
+</html>
+<%- include ("layouts/footer") %>
